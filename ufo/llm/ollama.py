@@ -177,6 +177,7 @@ class OllamaService(BaseService):
 
         url = f"{self.config_llm['API_BASE']}{api_path}"
         response = requests.post(
-            url=url, json=payload, timeout=self.timeout, stream=stream
+            url=url, json=payload, timeout=self.timeout, stream=stream,
+            headers={"API_KEY": self.config_llm.get('API_KEY', "ollama")}
         )
         return response
