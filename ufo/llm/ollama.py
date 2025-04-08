@@ -160,10 +160,11 @@ class OllamaService(BaseService):
                         tmp_image_text = tmp_text
                 message["content"] = (
                     tmp_text
-                    + "And the image is the screenshot from windows,"
-                    + tmp_image_text[:-1]
+                    + ("And the image is the screenshot from windows,"
+                    + tmp_image_text[:-1]) if self.config_llm['VISUAL_MODE'] else ""
                 )
-                message["images"] = [self.resize_base64_image(tmp_image)]
+                if self.config_llm['VISUAL_MODE']:
+                    message["images"] = [self.resize_base64_image(tmp_image)]
         return _messages
 
     def _request_api(self, api_path: str, payload: Any, stream: bool = False) -> Any:
