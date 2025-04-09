@@ -161,7 +161,7 @@ class OllamaService(BaseService):
                 message["content"] = (
                     tmp_text
                     + ("And the image is the screenshot from windows,"
-                    + tmp_image_text[:-1]) if self.config_llm['VISUAL_MODE'] else ""
+                    + tmp_image_text[:-1] if self.config_llm['VISUAL_MODE'] else "")
                 )
                 if self.config_llm['VISUAL_MODE']:
                     message["images"] = [self.resize_base64_image(tmp_image)]
