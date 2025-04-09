@@ -112,6 +112,10 @@ class EvaluationAgent(BasicAgent):
             message=message, namescope="app", use_backup_engine=True
         )
 
+        # If response has an embedded JSON, extract it
+        if "```json" in result:
+            result = result.split("```json")[1].split("```")[0]
+
         result = json_parser(result)
 
         return result, cost
